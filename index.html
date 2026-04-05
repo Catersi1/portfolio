@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizael Canales Pena | Software Developer & Data Engineer</title>
+    <meta name="description" content="Portfolio of Mizael Canales Pena - Full-Stack Developer, Data Engineer, and U.S. Army Veteran specializing in AI-augmented applications, data pipelines, and modern web technologies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a26;
+            --border: #1e1e2e;
+            --text: #e4e4ef;
+            --text-muted: #8888a0;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --pink: #ec4899;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Gradient mesh background */
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav .nav-links a:hover { color: var(--accent); }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 5rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            width: fit-content;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent), var(--blue), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+        }
+
+        /* Stats bar */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* Section headers */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.35rem 0.8rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .project-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .project-body {
+            padding: 1rem 1.5rem 1.5rem;
+        }
+
+        .project-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-tech span {
+            padding: 0.25rem 0.6rem;
+            background: rgba(99, 102, 241, 0.08);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--blue), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+        }
+
+        .timeline-item .role {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .timeline-item .company {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item .dates {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-card .label { font-size: 0.8rem; color: var(--text-muted); }
+        .contact-card .value { font-weight: 600; font-size: 0.95rem; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links a { margin-left: 1rem; font-size: 0.8rem; }
+            section { padding: 4rem 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">MCP</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="hero-badge animate">
+            <span>&#9733;</span> U.S. Army Veteran &bull; OIF
+        </div>
+        <h1 class="animate delay-1">
+            Hi, I'm <span class="gradient-text">Mizael Canales Pena</span>
+        </h1>
+        <p class="animate delay-2">
+            Full-Stack Developer & Data Engineer building AI-augmented applications,
+            scalable data pipelines, and modern web platforms. Founder of Hardy Sprouts LLC,
+            with expertise spanning React, TypeScript, Python, and cloud-native AI/ML systems.
+        </p>
+        <div class="hero-cta animate delay-3">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="https://github.com/Catersi1" target="_blank" class="btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="mailto:mizaelpena@hardysprouts.com" class="btn btn-secondary">Get in Touch</a>
+        </div>
+
+        <div class="stats animate delay-4">
+            <div class="stat-card">
+                <div class="number">7+</div>
+                <div class="label">Years in Tech & Leadership</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">15+</div>
+                <div class="label">Projects Built</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5</div>
+                <div class="label">Languages & Frameworks</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">3</div>
+                <div class="label">Industries Served</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-label">Expertise</div>
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-desc">A versatile stack spanning frontend, backend, data engineering, and AI/ML — built through years of hands-on product development.</p>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>&#9889; Frontend & UI</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">React 19</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">Responsive Design</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>&#9881; Backend & APIs</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Supabase</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Express</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>&#129302; AI & Machine Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Gemini</span>
+                    <span class="skill-tag">Ollama</span>
+                    <span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">RAG Pipelines</span>
+                    <span class="skill-tag">NLP</span>
+                    <span class="skill-tag">Vector Search</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>&#128202; Data Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">ETL Pipelines</span>
+                    <span class="skill-tag">Data Warehousing</span>
+                    <span class="skill-tag">Neo4j</span>
+                    <span class="skill-tag">Data Modeling</span>
+                    <span class="skill-tag">Analytics</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>&#9729; Cloud & DevOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Vercel</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>&#127942; Leadership</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Team Management</span>
+                    <span class="skill-tag">Agile/Scrum</span>
+                    <span class="skill-tag">Cross-functional</span>
+                    <span class="skill-tag">Bilingual (EN/ES)</span>
+                    <span class="skill-tag">Stakeholder Comm.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-label">Portfolio</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-desc">A selection of applications I've designed, built, and shipped — from AI-powered tools to full-stack platforms.</p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(99, 102, 241, 0.15);">&#128640;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/hardy-sprouts-" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>Hardy Sprouts LLC</h3>
+                    <p>Company website and platform for Hardy Sprouts — a software development firm specializing in AI-augmented tools, data-driven applications, and modern web solutions for businesses.</p>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Responsive Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(59, 130, 246, 0.15);">&#128225;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/canvas-radar-dashboard" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>Canvas Radar Dashboard</h3>
+                    <p>Real-time analytics dashboard with interactive radar visualizations, data filtering, and dynamic charting. Built for monitoring and insights at scale.</p>
+                    <div class="project-tech">
+                        <span>TypeScript</span>
+                        <span>React</span>
+                        <span>Canvas API</span>
+                        <span>Data Viz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(236, 72, 153, 0.15);">&#128269;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/nexus-app" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>NexusVault</h3>
+                    <p>AI-powered PDF data investigations tool enabling offline document analysis, intelligent search, and structured data extraction from complex documents.</p>
+                    <div class="project-tech">
+                        <span>TypeScript</span>
+                        <span>AI/ML</span>
+                        <span>PDF Processing</span>
+                        <span>Offline-first</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(34, 197, 94, 0.15);">&#127968;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/heritage2" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>Heritage Housing</h3>
+                    <p>Full-stack home buying application tool with property search, user authentication, data-driven recommendations, and an intuitive property management interface.</p>
+                    <div class="project-tech">
+                        <span>TypeScript</span>
+                        <span>Python</span>
+                        <span>Supabase</span>
+                        <span>React</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(245, 158, 11, 0.15);">&#128218;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/USMLE-step-2-practice-test-app" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>USMLE Practice App</h3>
+                    <p>Medical exam preparation platform with adaptive questioning, progress tracking, performance analytics, and spaced repetition for effective study sessions.</p>
+                    <div class="project-tech">
+                        <span>TypeScript</span>
+                        <span>React</span>
+                        <span>Analytics</span>
+                        <span>Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon" style="background: rgba(99, 102, 241, 0.15);">&#128736;</div>
+                    <div class="project-links">
+                        <a href="https://github.com/Catersi1/Anteapp" target="_blank">Code</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3>ServicePro</h3>
+                    <p>Service management platform for field operations — scheduling, dispatch, real-time tracking, and client communications built for service-oriented businesses.</p>
+                    <div class="project-tech">
+                        <span>TypeScript</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Supabase</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-label">Career</div>
+        <h2 class="section-title">Professional Experience</h2>
+        <p class="section-desc">From military service to enterprise tech to entrepreneurship — a path built on leadership, adaptability, and technical excellence.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="role">Founder & Software Developer</div>
+                <div class="company">Hardy Sprouts LLC</div>
+                <div class="dates">January 2023 &mdash; Present</div>
+                <div class="desc">Building AI-augmented web applications and data-driven solutions for clients. Leading full product lifecycle from architecture to deployment using React, TypeScript, Python, Supabase, and modern AI/ML tooling including LangChain and Gemini.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="role">Senior Associate, Accounts Payable</div>
+                <div class="company">Salesforce</div>
+                <div class="dates">November 2021 &mdash; 2023</div>
+                <div class="desc">Managed high-volume financial data processing and analysis at enterprise scale. Developed process optimizations, collaborated cross-functionally with engineering and finance teams, and worked with large-scale data systems.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="role">General Manager</div>
+                <div class="company">Heavy Calibre 24 Security</div>
+                <div class="dates">August 2019 &mdash; November 2021</div>
+                <div class="desc">Led all business operations, team management, client relations, and strategic planning. Managed budgets, hiring, training, and service delivery for a security services organization.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="role">U.S. Army Veteran</div>
+                <div class="company">United States Army &bull; Operation Iraqi Freedom</div>
+                <div class="dates">Military Service</div>
+                <div class="desc">Served in Operation Iraqi Freedom. Developed leadership, discipline, rapid decision-making, and mission-critical operational skills under high-pressure environments. Honorably discharged.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-label">Connect</div>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-desc">Open to data engineering, AI/ML, and full-stack opportunities. Let's connect.</p>
+
+        <div class="contact-grid">
+            <a href="mailto:mizaelpena@hardysprouts.com" class="contact-card">
+                <div class="contact-icon">&#9993;</div>
+                <div>
+                    <div class="label">Email</div>
+                    <div class="value">mizaelpena@hardysprouts.com</div>
+                </div>
+            </a>
+            <a href="https://github.com/Catersi1" target="_blank" class="contact-card">
+                <div class="contact-icon">&#128187;</div>
+                <div>
+                    <div class="label">GitHub</div>
+                    <div class="value">github.com/Catersi1</div>
+                </div>
+            </a>
+            <a href="tel:701-441-1388" class="contact-card">
+                <div class="contact-icon">&#128222;</div>
+                <div>
+                    <div class="label">Phone</div>
+                    <div class="value">(701) 441-1388</div>
+                </div>
+            </a>
+            <div class="contact-card">
+                <div class="contact-icon">&#128205;</div>
+                <div>
+                    <div class="label">Location</div>
+                    <div class="value">Shawnee, Oklahoma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mizael Canales Pena. Built with purpose.</p>
+    </footer>
+
+    <script>
+        // Intersection observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.skill-category, .project-card, .timeline-item, .contact-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease-out';
+            observer.observe(el);
+        });
+
+        // Smooth nav highlight
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
